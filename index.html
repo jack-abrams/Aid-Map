@@ -29,18 +29,7 @@
   <script>
 
     const map = L.map('map').setView([34.1425, -118.2551], 11);
-    L.marker([40, -74]).addTo(map);
-    var circle = L.circle([40, -74], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(map);
-    var polygon = L.polygon([
-    [40, 74],
-    [45, 80],
-    [45, 74]
-]).addTo(map);
+    
    
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
