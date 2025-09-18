@@ -2,9 +2,459 @@
   "type": "FeatureCollection",
   "features": [
     {
-      "type":"Feature",
-      "properties":{"name":"Glendale","homeless":312,"population":196543},
-      "geometry":{"type":"Polygon","coordinates":[[[-118.31,34.17],[-118.21,34.17],[-118.21,34.08],[-118.31,34.08],[-118.31,34.17]]]}
+      "type": "Feature",
+      "properties": {
+        "name": "Glendale, CA",
+        "homeless": 542,
+        "population": 196543
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.31,
+              34.2
+            ],
+            [
+              -118.18,
+              34.2
+            ],
+            [
+              -118.18,
+              34.08
+            ],
+            [
+              -118.31,
+              34.08
+            ],
+            [
+              -118.31,
+              34.2
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Chicago, IL",
+        "homeless": 11179,
+        "population": 2718782,
+        "shelters": 10,
+        "total_capacity": 20804,
+        "available_beds": 9625,
+        "average_occupancy_rate": 54.22,
+        "average_age": 41.7,
+        "male_percentage": 54.4,
+        "female_percentage": 45.6
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -87.74979820000001,
+              41.998113599999996
+            ],
+            [
+              -87.5097982,
+              41.998113599999996
+            ],
+            [
+              -87.5097982,
+              41.7581136
+            ],
+            [
+              -87.74979820000001,
+              41.7581136
+            ],
+            [
+              -87.74979820000001,
+              41.998113599999996
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Dallas, TX",
+        "homeless": 8938,
+        "population": 1257676,
+        "shelters": 10,
+        "total_capacity": 17094,
+        "available_beds": 8156,
+        "average_occupancy_rate": 52.19,
+        "average_age": 41.8,
+        "male_percentage": 54.0,
+        "female_percentage": 46.0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -96.91698790000001,
+              32.8966642
+            ],
+            [
+              -96.6769879,
+              32.8966642
+            ],
+            [
+              -96.6769879,
+              32.6566642
+            ],
+            [
+              -96.91698790000001,
+              32.6566642
+            ],
+            [
+              -96.91698790000001,
+              32.8966642
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Houston, TX",
+        "homeless": 9552,
+        "population": 2195914,
+        "shelters": 10,
+        "total_capacity": 18775,
+        "available_beds": 9223,
+        "average_occupancy_rate": 50.41,
+        "average_age": 42.9,
+        "male_percentage": 54.2,
+        "female_percentage": 45.8
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.4898028,
+              29.8804267
+            ],
+            [
+              -95.2498028,
+              29.8804267
+            ],
+            [
+              -95.2498028,
+              29.6404267
+            ],
+            [
+              -95.4898028,
+              29.6404267
+            ],
+            [
+              -95.4898028,
+              29.8804267
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Los Angeles, CA",
+        "homeless": 10106,
+        "population": 3884307,
+        "shelters": 10,
+        "total_capacity": 20537,
+        "available_beds": 10431,
+        "average_occupancy_rate": 49.46,
+        "average_age": 42.7,
+        "male_percentage": 55.4,
+        "female_percentage": 44.6
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.36368490000002,
+              34.1722342
+            ],
+            [
+              -118.12368490000001,
+              34.1722342
+            ],
+            [
+              -118.12368490000001,
+              33.9322342
+            ],
+            [
+              -118.36368490000002,
+              33.9322342
+            ],
+            [
+              -118.36368490000002,
+              34.1722342
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "New York, NY",
+        "homeless": 7353,
+        "population": 8405837,
+        "shelters": 10,
+        "total_capacity": 16236,
+        "available_beds": 8883,
+        "average_occupancy_rate": 46.89,
+        "average_age": 39.9,
+        "male_percentage": 54.3,
+        "female_percentage": 45.7
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -74.1259413,
+              40.8327837
+            ],
+            [
+              -73.88594129999998,
+              40.8327837
+            ],
+            [
+              -73.88594129999998,
+              40.592783700000005
+            ],
+            [
+              -74.1259413,
+              40.592783700000005
+            ],
+            [
+              -74.1259413,
+              40.8327837
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Philadelphia, PA",
+        "homeless": 8171,
+        "population": 1553165,
+        "shelters": 10,
+        "total_capacity": 16462,
+        "available_beds": 8291,
+        "average_occupancy_rate": 49.74,
+        "average_age": 42.4,
+        "male_percentage": 53.5,
+        "female_percentage": 46.5
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.2852215,
+              40.0725839
+            ],
+            [
+              -75.0452215,
+              40.0725839
+            ],
+            [
+              -75.0452215,
+              39.8325839
+            ],
+            [
+              -75.2852215,
+              39.8325839
+            ],
+            [
+              -75.2852215,
+              40.0725839
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Phoenix, AZ",
+        "homeless": 8174,
+        "population": 1513367,
+        "shelters": 10,
+        "total_capacity": 15390,
+        "available_beds": 7216,
+        "average_occupancy_rate": 50.44,
+        "average_age": 43.2,
+        "male_percentage": 54.3,
+        "female_percentage": 45.7
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -112.1940373,
+              33.5683771
+            ],
+            [
+              -111.9540373,
+              33.5683771
+            ],
+            [
+              -111.9540373,
+              33.328377100000004
+            ],
+            [
+              -112.1940373,
+              33.328377100000004
+            ],
+            [
+              -112.1940373,
+              33.5683771
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Antonio, TX",
+        "homeless": 9496,
+        "population": 1409019,
+        "shelters": 10,
+        "total_capacity": 18633,
+        "available_beds": 9137,
+        "average_occupancy_rate": 51.51,
+        "average_age": 43.2,
+        "male_percentage": 55.4,
+        "female_percentage": 44.6
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -98.61362820000001,
+              29.5441219
+            ],
+            [
+              -98.3736282,
+              29.5441219
+            ],
+            [
+              -98.3736282,
+              29.3041219
+            ],
+            [
+              -98.61362820000001,
+              29.3041219
+            ],
+            [
+              -98.61362820000001,
+              29.5441219
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Diego, CA",
+        "homeless": 9404,
+        "population": 1355896,
+        "shelters": 10,
+        "total_capacity": 18023,
+        "available_beds": 8619,
+        "average_occupancy_rate": 52.69,
+        "average_age": 43.2,
+        "male_percentage": 55.4,
+        "female_percentage": 44.6
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -117.2810838,
+              32.835738
+            ],
+            [
+              -117.0410838,
+              32.835738
+            ],
+            [
+              -117.0410838,
+              32.595738000000004
+            ],
+            [
+              -117.2810838,
+              32.595738000000004
+            ],
+            [
+              -117.2810838,
+              32.835738
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "San Jose, CA",
+        "homeless": 9501,
+        "population": 998537,
+        "shelters": 10,
+        "total_capacity": 17169,
+        "available_beds": 7668,
+        "average_occupancy_rate": 54.28,
+        "average_age": 39.0,
+        "male_percentage": 55.4,
+        "female_percentage": 44.6
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -122.00632859999999,
+              37.458208199999994
+            ],
+            [
+              -121.76632859999998,
+              37.458208199999994
+            ],
+            [
+              -121.76632859999998,
+              37.2182082
+            ],
+            [
+              -122.00632859999999,
+              37.2182082
+            ],
+            [
+              -122.00632859999999,
+              37.458208199999994
+            ]
+          ]
+        ]
+      }
     }
   ]
 }
