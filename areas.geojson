@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type":"Feature",
+      "properties":{"name":"Glendale","homeless":312,"population":196543},
+      "geometry":{"type":"Polygon","coordinates":[[[-118.31,34.17],[-118.21,34.17],[-118.21,34.08],[-118.31,34.08],[-118.31,34.17]]]}
+    }
+  ]
+}
