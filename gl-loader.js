@@ -28,11 +28,7 @@ function csvToGeoJSONRecs(recs){
   for (const o of recs){
     const lat = parseFloat(o.lat), lng = parseFloat(o.lng);
     if (Number.isFinite(lat) && Number.isFinite(lng)){
-      feats.push({
-        type: "Feature",
-        geometry: { type: "Point", coordinates: [lng, lat] },
-        properties: o
-      });
+      feats.push({ type: "Feature", geometry: { type: "Point", coordinates: [lng, lat] }, properties: o });
     }
   }
   return { type: "FeatureCollection", features: feats };
@@ -51,73 +47,144 @@ function csvToGeoJSONRecs(recs){
 
   const csvText = await fetch("foodbanks.csv", { cache: "no-store" }).then(r=>r.text());
   const records = recordsFromCSV(csvText);
-  const geojson = csvToGeoJSONRecs(records);
+  const points = csvToGeoJSONRecs(records);
 
   map.on("load", async () => {
-    map.addSource("banks", { type: "geojson", data: geojson, cluster: true, clusterRadius: 50 });
+
+    map.addSource("banks", { type: "geojson", data: points, cluster: true, clusterRadius: 50 });
 
     map.addLayer({
-      id: "clusters",
-      type: "circle",
-      source: "banks",
-      filter: ["has", "point_count"],
+      id: "clusters", type: "circle", source: "banks", filter: ["has", "point_count"],
       paint: {
-        "circle-color": ["step", ["get", "point_count"],
-          "#a5b4fc", 10, "#818cf8", 25, "#6366f1", 50, "#4f46e5"
-        ],
-        "circle-radius": ["step", ["get", "point_count"],
-          14, 10, 18, 25, 22, 50, 28
-        ]
+        "circle-color": ["step", ["get", "point_count"], "#a5b4fc", 10, "#818cf8", 25, "#6366f1", 50, "#4f46e5"],
+        "circle-radius": ["step", ["get", "point_count"], 14, 10, 18, 25, 22, 50, 28]
       }
     });
-
     map.addLayer({
-      id: "cluster-count",
-      type: "symbol",
-      source: "banks",
-      filter: ["has", "point_count"],
+      id: "cluster-count", type: "symbol", source: "banks", filter: ["has", "point_count"],
       layout: { "text-field": ["get", "point_count_abbreviated"], "text-size": 12 },
       paint: { "text-color": "#ffffff" }
     });
-
     map.addLayer({
-      id: "unclustered",
-      type: "circle",
-      source: "banks",
-      filter: ["!", ["has", "point_count"]],
-      paint: {
-        "circle-radius": 6,
-        "circle-color": "#22c55e",
-        "circle-stroke-color": "#ffffff",
-        "circle-stroke-width": 2
-      }
+      id: "unclustered", type: "circle", source: "banks", filter: ["!", ["has", "point_count"]],
+      paint: { "circle-radius": 6, "circle-color": "#22c55e", "circle-stroke-color": "#ffffff", "circle-stroke-width": 2 }
     });
 
     const popup = new maplibregl.Popup({ closeButton: false, closeOnClick: true });
     map.on("click", "unclustered", (e) => {
-      const f = e.features[0];
-      const p = f.properties || {};
-      const name = p.name || "Food Bank";
-      const addr = p.address || "";
-      const phone = p.phone ? `<br>${p.phone}` : "";
-      const hours = p.hours ? `<br>${p.hours}` : "";
-      const web = p.website ? `<br><a href="${p.website}" target="_blank" rel="noopener">Website</a>` : "";
-      const html = `<b>${name}</b><br>${addr}${phone}${hours}${web}`;
+      const f = e.features[0]; const p = f.properties || {};
+      const html = `<b>${p.name||"Food Bank"}</b><br>${p.address||""}`
+        + (p.phone?`<br>${p.phone}`:"") + (p.hours?`<br>${p.hours}`:"")
+        + (p.website?`<br><a href="${p.website}" target="_blank" rel="noopener">Website</a>`:"");
       popup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
     });
-
     map.on("click", "clusters", async (e) => {
       const features = map.queryRenderedFeatures(e.point, { layers: ["clusters"] });
       const clusterId = features[0].properties.cluster_id;
-      const source = map.getSource("banks");
-      const zoom = await source.getClusterExpansionZoom(clusterId);
+      const src = map.getSource("banks");
+      const zoom = await src.getClusterExpansionZoom(clusterId);
       map.easeTo({ center: features[0].geometry.coordinates, zoom });
     });
 
-    if (geojson.features.length){
+    if (points.features.length){
       const b = new maplibregl.LngLatBounds();
-      geojson.features.forEach(f => b.extend(f.geometry.coordinates));
+      points.features.forEach(f => b.extend(f.geometry.coordinates));
       map.fitBounds(b, { padding: 24, maxZoom: 13, duration: 500 });
+    }
+
+    const breaks = [0,1,2,4,8,15,25,50];
+    const colors = ["#FFEDA0","#FED976","#FEB24C","#FD8D3C","#FC4E2A","#E31A1C","#BD0026","#800026"];
+
+    const areasRaw = await fetch("areas.geojson", { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(()=>null);
+
+    if (areasRaw && areasRaw.features?.length){
+      let idCounter = 1;
+      const areas = {
+        type: "FeatureCollection",
+        features: areasRaw.features.map(f => {
+          const p = f.properties || {};
+          const rate = (p.population > 0) ? (1000 * (p.homeless || 0) / p.population) : (p.homeless || 0);
+          return { ...f, id: (p.id ?? idCounter++), properties: { ...p, rate } };
+        })
+      };
+
+      map.addSource("areas", { type: "geojson", data: areas, promoteId: "id" });
+
+      map.addLayer({
+        id: "areas-fill",
+        type: "fill",
+        source: "areas",
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": [
+            "step", ["get","rate"],
+            colors[0], breaks[1], colors[1], breaks[2], colors[2], breaks[3], colors[3],
+            breaks[4], colors[4], breaks[5], colors[5], breaks[6], colors[6], breaks[7], colors[7]
+          ],
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state","hover"], false], 0.9,
+            0.65
+          ]
+        }
+      });
+
+      map.addLayer({
+        id: "areas-outline",
+        type: "line",
+        source: "areas",
+        layout: { visibility: "none" },
+        paint: { "line-color": "#ffffff", "line-width": 1 }
+      });
+
+      let hoveredId = null;
+      const areaPopup = new maplibregl.Popup({ closeButton:false, closeOnClick:false, offset: 8 });
+
+      function showAreaInfo(e){
+        const f = e.features[0]; const p = f.properties;
+        const html = `<b>${p.name||"Area"}</b><br>` +
+          `Count: <b>${p.homeless ?? "—"}</b>` +
+          (p.population ? `<br>Rate: <b>${(p.rate||0).toFixed(1)}</b> / 1,000<br>Population: ${(+p.population).toLocaleString()}` : "");
+        areaPopup.setLngLat(e.lngLat).setHTML(html).addTo(map);
+      }
+
+      map.on("mousemove", "areas-fill", (e)=>{
+        if (!e.features.length) return;
+        const id = e.features[0].id;
+        if (hoveredId !== null) map.setFeatureState({ source:"areas", id: hoveredId }, { hover:false });
+        hoveredId = id;
+        map.setFeatureState({ source:"areas", id }, { hover:true });
+        showAreaInfo(e);
+      });
+      map.on("mouseleave", "areas-fill", ()=>{
+        if (hoveredId !== null) map.setFeatureState({ source:"areas", id: hoveredId }, { hover:false });
+        hoveredId = null;
+        areaPopup.remove();
+      });
+
+      map.on("click", "areas-fill", (e)=>{
+        showAreaInfo(e);
+        map.easeTo({ center: e.lngLat, zoom: Math.max(map.getZoom(), 12) });
+      });
+
+      const checkbox = document.getElementById("toggle-choropleth");
+      const legend = document.getElementById("legend");
+
+      let html = "<b>Homeless per 1,000</b>";
+      for (let i=0;i<breaks.length;i++){
+        const from = breaks[i], to = breaks[i+1];
+        html += `<div class="legend-row"><span class="swatch" style="background:${colors[i]}"></span>${from}${to ? "–"+to : "+"}</div>`;
+      }
+      legend.innerHTML = html;
+
+      function setChoroVisible(vis){
+        const v = vis ? "visible" : "none";
+        map.setLayoutProperty("areas-fill", "visibility", v);
+        map.setLayoutProperty("areas-outline", "visibility", v);
+        legend.style.display = vis ? "block" : "none";
+      }
+
+      checkbox.addEventListener("change", (e)=> setChoroVisible(e.target.checked));
     }
 
     const q = document.getElementById("q");
