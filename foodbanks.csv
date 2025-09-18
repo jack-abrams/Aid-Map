@@ -1,0 +1,11 @@
+name,lat,lng,address,website,phone,hours,category
+Los Angeles Regional Food Bank,34.014874,-118.229401,"1734 E 41st St, Los Angeles, CA 90058",https://www.lafoodbank.org,(323) 234-3030,"Mon–Fri 8–4",Regional Food Bank
+Westside Food Bank,34.028897,-118.468873,"1710 22nd St, Santa Monica, CA 90404",https://www.westsidefoodbank.org,(310) 828-6016,"Mon–Fri 8–5",Food Bank
+St. Francis Center,34.041716,-118.261617,"1835 S Hope St, Los Angeles, CA 90015",https://www.stfranciscenterla.org,(213) 747-5347,"Mon–Fri 7–3",Pantry
+Los Angeles Mission,34.044189,-118.248903,"303 E 5th St, Los Angeles, CA 90013",https://www.losangelesmission.org,(213) 629-1227,"Daily 6–6",Mission
+Union Rescue Mission,34.043525,-118.249905,"545 S San Pedro St, Los Angeles, CA 90013",https://urm.org,(213) 347-6300,"Daily 24 hrs",Mission
+St. Vincent Meals on Wheels,34.065336,-118.281152,"2303 Miramar St, Los Angeles, CA 90057",https://www.stvincentmow.org,(213) 484-7112,"Mon–Fri 8–4",Meal Service
+HopeNet Food Pantry,34.076721,-118.308071,"760 S Westmoreland Ave, Los Angeles, CA 90005",https://hopenetla.org,(213) 389-9949,"Tue–Sat 10–3",Pantry
+LA LGBT Center Pantry,34.090646,-118.327847,"1118 N McCadden Pl, Los Angeles, CA 90038",https://lalgbtcenter.org,(323) 993-7400,"Wed–Fri 10–4",Pantry
+SOVA Community Food and Resource Program,34.172304,-118.375115,"16439 Vanowen St, Van Nuys, CA 91406",https://www.jfsla.org/program/sova,(818) 988-7682,"Mon–Thu 9–3",Food Pantry
+World Harvest Food Bank,34.036719,-118.341074,"3100 Venice Blvd, Los Angeles, CA 90019",https://worldharvestla.org,(213) 746-2227,"Mon–Sat 8–5",Food Bank
