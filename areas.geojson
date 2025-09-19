@@ -5,7 +5,7 @@
       "type": "Feature",
       "properties": {
         "name": "Alabama",
-        "homeless": null,
+        "homeless": 3752,
         "abbreviation": "AL",
         "population": 4849377
       },
@@ -153,7 +153,7 @@
       "type": "Feature",
       "properties": {
         "name": "Alaska",
-        "homeless": null,
+        "homeless": 2320,
         "abbreviation": "AK",
         "population": 736732
       },
@@ -4619,7 +4619,7 @@
       "type": "Feature",
       "properties": {
         "name": "Arizona",
-        "homeless": null,
+        "homeless": 13553,
         "abbreviation": "AZ",
         "population": 6731484
       },
@@ -4763,7 +4763,7 @@
       "type": "Feature",
       "properties": {
         "name": "Arkansas",
-        "homeless": null,
+        "homeless": 2459,
         "abbreviation": "AR",
         "population": 2966369
       },
@@ -4927,7 +4927,7 @@
       "type": "Feature",
       "properties": {
         "name": "California",
-        "homeless": null,
+        "homeless": 171521,
         "abbreviation": "CA",
         "population": 38802500
       },
@@ -5315,7 +5315,7 @@
       "type": "Feature",
       "properties": {
         "name": "Colorado",
-        "homeless": null,
+        "homeless": 10397,
         "abbreviation": "CO",
         "population": 5355866
       },
@@ -5395,7 +5395,7 @@
       "type": "Feature",
       "properties": {
         "name": "Connecticut",
-        "homeless": null,
+        "homeless": 2930,
         "abbreviation": "CT",
         "population": 3596677
       },
@@ -5475,7 +5475,7 @@
       "type": "Feature",
       "properties": {
         "name": "Delaware",
-        "homeless": null,
+        "homeless": 2369,
         "abbreviation": "DE",
         "population": 935614
       },
@@ -5543,7 +5543,7 @@
       "type": "Feature",
       "properties": {
         "name": "Florida",
-        "homeless": null,
+        "homeless": 25959,
         "abbreviation": "FL",
         "population": 19893297
       },
@@ -5871,7 +5871,7 @@
       "type": "Feature",
       "properties": {
         "name": "Georgia",
-        "homeless": null,
+        "homeless": 10689,
         "abbreviation": "GA",
         "population": 10097343
       },
@@ -6091,7 +6091,7 @@
       "type": "Feature",
       "properties": {
         "name": "Hawaii",
-        "homeless": null,
+        "homeless": 5967,
         "abbreviation": "HI",
         "population": 1419561
       },
@@ -6321,7 +6321,7 @@
       "type": "Feature",
       "properties": {
         "name": "Idaho",
-        "homeless": null,
+        "homeless": 1998,
         "abbreviation": "ID",
         "population": 1634464
       },
@@ -6601,7 +6601,7 @@
       "type": "Feature",
       "properties": {
         "name": "Illinois",
-        "homeless": null,
+        "homeless": 9212,
         "abbreviation": "IL",
         "population": 12880580
       },
@@ -6885,7 +6885,7 @@
       "type": "Feature",
       "properties": {
         "name": "Indiana",
-        "homeless": null,
+        "homeless": 5449,
         "abbreviation": "IN",
         "population": 6596855
       },
@@ -7085,7 +7085,7 @@
       "type": "Feature",
       "properties": {
         "name": "Iowa",
-        "homeless": null,
+        "homeless": 2419,
         "abbreviation": "IA",
         "population": 3107126
       },
@@ -7301,7 +7301,7 @@
       "type": "Feature",
       "properties": {
         "name": "Kansas",
-        "homeless": null,
+        "homeless": 2397,
         "abbreviation": "KS",
         "population": 2904021
       },
@@ -7369,7 +7369,7 @@
       "type": "Feature",
       "properties": {
         "name": "Kentucky",
-        "homeless": null,
+        "homeless": 3984,
         "abbreviation": "KY",
         "population": 4413457
       },
@@ -7685,7 +7685,7 @@
       "type": "Feature",
       "properties": {
         "name": "Louisiana",
-        "homeless": null,
+        "homeless": 7373,
         "abbreviation": "LA",
         "population": 4649676
       },
@@ -8005,7 +8005,7 @@
       "type": "Feature",
       "properties": {
         "name": "Maine",
-        "homeless": null,
+        "homeless": 4411,
         "abbreviation": "ME",
         "population": 1330089
       },
@@ -8285,7 +8285,7 @@
       "type": "Feature",
       "properties": {
         "name": "Maryland",
-        "homeless": null,
+        "homeless": 5349,
         "abbreviation": "MD",
         "population": 5976407
       },
@@ -8563,7 +8563,7 @@
       "type": "Feature",
       "properties": {
         "name": "Massachusetts",
-        "homeless": null,
+        "homeless": 15507,
         "abbreviation": "MA",
         "population": 6745408
       },
@@ -8719,7 +8719,7 @@
       "type": "Feature",
       "properties": {
         "name": "Michigan",
-        "homeless": null,
+        "homeless": 8206,
         "abbreviation": "MI",
         "population": 9909877
       },
@@ -9357,7 +9357,7 @@
       "type": "Feature",
       "properties": {
         "name": "Minnesota",
-        "homeless": null,
+        "homeless": 7917,
         "abbreviation": "MN",
         "population": 5457173
       },
@@ -9705,7 +9705,7 @@
       "type": "Feature",
       "properties": {
         "name": "Mississippi",
-        "homeless": null,
+        "homeless": 1196,
         "abbreviation": "MS",
         "population": 2994079
       },
@@ -9905,7 +9905,7 @@
       "type": "Feature",
       "properties": {
         "name": "Missouri",
-        "homeless": null,
+        "homeless": 5992,
         "abbreviation": "MO",
         "population": 6063589
       },
@@ -10133,7 +10133,7 @@
       "type": "Feature",
       "properties": {
         "name": "Montana",
-        "homeless": null,
+        "homeless": 1585,
         "abbreviation": "MT",
         "population": 1023579
       },
@@ -10357,7 +10357,7 @@
       "type": "Feature",
       "properties": {
         "name": "Nebraska",
-        "homeless": null,
+        "homeless": 2246,
         "abbreviation": "NE",
         "population": 1881503
       },
@@ -10489,7 +10489,7 @@
       "type": "Feature",
       "properties": {
         "name": "Nevada",
-        "homeless": null,
+        "homeless": 7618,
         "abbreviation": "NV",
         "population": 2839098
       },
@@ -10589,7 +10589,7 @@
       "type": "Feature",
       "properties": {
         "name": "New Hampshire",
-        "homeless": null,
+        "homeless": 1605,
         "abbreviation": "NH",
         "population": 1326813
       },
@@ -10717,7 +10717,7 @@
       "type": "Feature",
       "properties": {
         "name": "New Jersey",
-        "homeless": null,
+        "homeless": 8752,
         "abbreviation": "NJ",
         "population": 8938175
       },
@@ -10861,7 +10861,7 @@
       "type": "Feature",
       "properties": {
         "name": "New Mexico",
-        "homeless": null,
+        "homeless": 2560,
         "abbreviation": "NM",
         "population": 2085572
       },
@@ -10945,7 +10945,7 @@
       "type": "Feature",
       "properties": {
         "name": "New York",
-        "homeless": null,
+        "homeless": 74178,
         "abbreviation": "NY",
         "population": 19746227
       },
@@ -11233,7 +11233,7 @@
       "type": "Feature",
       "properties": {
         "name": "North Carolina",
-        "homeless": null,
+        "homeless": 9382,
         "abbreviation": "NC",
         "population": 9943964
       },
@@ -11493,7 +11493,7 @@
       "type": "Feature",
       "properties": {
         "name": "North Dakota",
-        "homeless": null,
+        "homeless": 610,
         "abbreviation": "ND",
         "population": 739482
       },
@@ -11573,7 +11573,7 @@
       "type": "Feature",
       "properties": {
         "name": "Ohio",
-        "homeless": null,
+        "homeless": 10654,
         "abbreviation": "OH",
         "population": 11594163
       },
@@ -11777,7 +11777,7 @@
       "type": "Feature",
       "properties": {
         "name": "Oklahoma",
-        "homeless": null,
+        "homeless": 3754,
         "abbreviation": "OK",
         "population": 3878051
       },
@@ -11973,7 +11973,7 @@
       "type": "Feature",
       "properties": {
         "name": "Oregon",
-        "homeless": null,
+        "homeless": 17959,
         "abbreviation": "OR",
         "population": 3970239
       },
@@ -12213,7 +12213,7 @@
       "type": "Feature",
       "properties": {
         "name": "Pennsylvania",
-        "homeless": null,
+        "homeless": 12691,
         "abbreviation": "PA",
         "population": 12787209
       },
@@ -12361,7 +12361,7 @@
       "type": "Feature",
       "properties": {
         "name": "Rhode Island",
-        "homeless": null,
+        "homeless": 1577,
         "abbreviation": "RI",
         "population": 1055173
       },
@@ -12443,7 +12443,7 @@
       "type": "Feature",
       "properties": {
         "name": "South Carolina",
-        "homeless": null,
+        "homeless": 3608,
         "abbreviation": "SC",
         "population": 4832482
       },
@@ -12635,7 +12635,7 @@
       "type": "Feature",
       "properties": {
         "name": "South Dakota",
-        "homeless": null,
+        "homeless": 1389,
         "abbreviation": "SD",
         "population": 853175
       },
@@ -12767,7 +12767,7 @@
       "type": "Feature",
       "properties": {
         "name": "Tennessee",
-        "homeless": null,
+        "homeless": 10567,
         "abbreviation": "TN",
         "population": 6549352
       },
@@ -12955,7 +12955,7 @@
       "type": "Feature",
       "properties": {
         "name": "Texas",
-        "homeless": null,
+        "homeless": 24432,
         "abbreviation": "TX",
         "population": 26956958
       },
@@ -13579,7 +13579,7 @@
       "type": "Feature",
       "properties": {
         "name": "Utah",
-        "homeless": null,
+        "homeless": 3557,
         "abbreviation": "UT",
         "population": 2942902
       },
@@ -13643,7 +13643,7 @@
       "type": "Feature",
       "properties": {
         "name": "Vermont",
-        "homeless": null,
+        "homeless": 2780,
         "abbreviation": "VT",
         "population": 626562
       },
@@ -13771,7 +13771,7 @@
       "type": "Feature",
       "properties": {
         "name": "Virginia",
-        "homeless": null,
+        "homeless": 6529,
         "abbreviation": "VA",
         "population": 8326289
       },
@@ -14117,7 +14117,7 @@
       "type": "Feature",
       "properties": {
         "name": "Washington",
-        "homeless": null,
+        "homeless": 25211,
         "abbreviation": "WA",
         "population": 7061530
       },
@@ -14431,7 +14431,7 @@
       "type": "Feature",
       "properties": {
         "name": "West Virginia",
-        "homeless": null,
+        "homeless": 1375,
         "abbreviation": "WV",
         "population": 1850326
       },
@@ -14707,7 +14707,7 @@
       "type": "Feature",
       "properties": {
         "name": "Wisconsin",
-        "homeless": null,
+        "homeless": 4775,
         "abbreviation": "WI",
         "population": 5757564
       },
@@ -15023,7 +15023,7 @@
       "type": "Feature",
       "properties": {
         "name": "Wyoming",
-        "homeless": null,
+        "homeless": 648,
         "abbreviation": "WY",
         "population": 584153
       },
