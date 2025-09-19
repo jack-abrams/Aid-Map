@@ -50,7 +50,6 @@ function csvToGeoJSONRecs(recs){
   const points = csvToGeoJSONRecs(records);
 
   map.on("load", async () => {
-    // --- Points (clusters) ---
     map.addSource("banks", { type: "geojson", data: points, cluster: true, clusterRadius: 50 });
     map.addLayer({
       id: "clusters", type: "circle", source: "banks", filter: ["has", "point_count"],
@@ -119,7 +118,9 @@ function csvToGeoJSONRecs(recs){
             colors[0],breaks[1],colors[1],breaks[2],colors[2],breaks[3],colors[3],
             breaks[4],colors[4],breaks[5],colors[5],breaks[6],colors[6],breaks[7],colors[7]
           ],
-          "fill-opacity":0.65
+          "fill-opacity":[
+            "case", ["boolean",["feature-state","hover"],false], 0.9, 0.65
+          ]
         }
       }, "clusters");
 
@@ -130,6 +131,41 @@ function csvToGeoJSONRecs(recs){
         layout:{visibility:"none"},
         paint:{"line-color":"#fff","line-width":1}
       }, "clusters");
+
+      let hoveredId = null;
+      const areaPopup = new maplibregl.Popup({ closeButton:false, closeOnClick:false, offset:8 });
+
+      function areaHTML(p){
+        const rate = (p.rate||0).toFixed(1);
+        const cnt = (p.homeless ?? "—");
+        const pop = p.population ? Number(p.population).toLocaleString() : "—";
+        return `<b>${p.name||"Area"}</b><br>Count: <b>${cnt}</b>` +
+               (p.population ? `<br>Rate: <b>${rate}</b> / 1,000<br>Population: ${pop}` : "");
+      }
+
+      map.on("mousemove","areas-fill",(e)=>{
+        if (!e.features.length) return;
+        const f = e.features[0];
+        if (hoveredId !== null) map.setFeatureState({source:"areas", id: hoveredId}, {hover:false});
+        hoveredId = f.id;
+        map.setFeatureState({source:"areas", id: hoveredId}, {hover:true});
+        areaPopup.setLngLat(e.lngLat).setHTML(areaHTML(f.properties)).addTo(map);
+      });
+
+      map.on("mouseleave","areas-fill",()=>{
+        if (hoveredId !== null) map.setFeatureState({source:"areas", id: hoveredId}, {hover:false});
+        hoveredId = null;
+        areaPopup.remove();
+      });
+
+      map.on("click","areas-fill",(e)=>{
+        if (!e.features.length) return;
+        const f = e.features[0];
+        new maplibregl.Popup({closeButton:true, closeOnClick:true, offset:8})
+          .setLngLat(e.lngLat)
+          .setHTML(areaHTML(f.properties))
+          .addTo(map);
+      });
 
       const checkbox = document.getElementById("toggle-choropleth");
       const legend = document.getElementById("legend");
