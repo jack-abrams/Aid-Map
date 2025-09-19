@@ -50,9 +50,8 @@ function csvToGeoJSONRecs(recs){
   const points = csvToGeoJSONRecs(records);
 
   map.on("load", async () => {
-
+    // --- Points (clusters) ---
     map.addSource("banks", { type: "geojson", data: points, cluster: true, clusterRadius: 50 });
-
     map.addLayer({
       id: "clusters", type: "circle", source: "banks", filter: ["has", "point_count"],
       paint: {
@@ -94,8 +93,7 @@ function csvToGeoJSONRecs(recs){
 
     const breaks = [0,1,2,4,8,15,25,50];
     const colors = ["#FFEDA0","#FED976","#FEB24C","#FD8D3C","#FC4E2A","#E31A1C","#BD0026","#800026"];
-
-    const areasRaw = await fetch("areas.geojson", { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(()=>null);
+    const areasRaw = await fetch("areas.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
 
     if (areasRaw && areasRaw.features?.length){
       let idCounter = 1;
@@ -103,109 +101,68 @@ function csvToGeoJSONRecs(recs){
         type: "FeatureCollection",
         features: areasRaw.features.map(f => {
           const p = f.properties || {};
-          const rate = (p.population > 0) ? (1000 * (p.homeless || 0) / p.population) : (p.homeless || 0);
-          return { ...f, id: (p.id ?? idCounter++), properties: { ...p, rate } };
+          const rate = (p.population>0)?(1000*(p.homeless||0)/p.population):(p.homeless||0);
+          return { ...f, id:(p.id??idCounter++), properties:{...p,rate} };
         })
       };
 
-      map.addSource("areas", { type: "geojson", data: areas, promoteId: "id" });
+      map.addSource("areas", { type:"geojson", data:areas, promoteId:"id" });
 
       map.addLayer({
-        id: "areas-fill",
-        type: "fill",
-        source: "areas",
-        layout: { visibility: "none" },
-        paint: {
-          "fill-color": [
-            "step", ["get","rate"],
-            colors[0], breaks[1], colors[1], breaks[2], colors[2], breaks[3], colors[3],
-            breaks[4], colors[4], breaks[5], colors[5], breaks[6], colors[6], breaks[7], colors[7]
+        id:"areas-fill",
+        type:"fill",
+        source:"areas",
+        layout:{visibility:"none"},
+        paint:{
+          "fill-color":[
+            "step",["get","rate"],
+            colors[0],breaks[1],colors[1],breaks[2],colors[2],breaks[3],colors[3],
+            breaks[4],colors[4],breaks[5],colors[5],breaks[6],colors[6],breaks[7],colors[7]
           ],
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state","hover"], false], 0.9,
-            0.65
-          ]
+          "fill-opacity":0.65
         }
-      });
+      }, "clusters");
 
       map.addLayer({
-        id: "areas-outline",
-        type: "line",
-        source: "areas",
-        layout: { visibility: "none" },
-        paint: { "line-color": "#ffffff", "line-width": 1 }
-      });
-
-      let hoveredId = null;
-      const areaPopup = new maplibregl.Popup({ closeButton:false, closeOnClick:false, offset: 8 });
-
-      function showAreaInfo(e){
-        const f = e.features[0]; const p = f.properties;
-        const html = `<b>${p.name||"Area"}</b><br>` +
-          `Count: <b>${p.homeless ?? "—"}</b>` +
-          (p.population ? `<br>Rate: <b>${(p.rate||0).toFixed(1)}</b> / 1,000<br>Population: ${(+p.population).toLocaleString()}` : "");
-        areaPopup.setLngLat(e.lngLat).setHTML(html).addTo(map);
-      }
-
-      map.on("mousemove", "areas-fill", (e)=>{
-        if (!e.features.length) return;
-        const id = e.features[0].id;
-        if (hoveredId !== null) map.setFeatureState({ source:"areas", id: hoveredId }, { hover:false });
-        hoveredId = id;
-        map.setFeatureState({ source:"areas", id }, { hover:true });
-        showAreaInfo(e);
-      });
-      map.on("mouseleave", "areas-fill", ()=>{
-        if (hoveredId !== null) map.setFeatureState({ source:"areas", id: hoveredId }, { hover:false });
-        hoveredId = null;
-        areaPopup.remove();
-      });
-
-      map.on("click", "areas-fill", (e)=>{
-        showAreaInfo(e);
-        map.easeTo({ center: e.lngLat, zoom: Math.max(map.getZoom(), 12) });
-      });
+        id:"areas-outline",
+        type:"line",
+        source:"areas",
+        layout:{visibility:"none"},
+        paint:{"line-color":"#fff","line-width":1}
+      }, "clusters");
 
       const checkbox = document.getElementById("toggle-choropleth");
       const legend = document.getElementById("legend");
-
       let html = "<b>Homeless per 1,000</b>";
-      for (let i=0;i<breaks.length;i++){
-        const from = breaks[i], to = breaks[i+1];
-        html += `<div class="legend-row"><span class="swatch" style="background:${colors[i]}"></span>${from}${to ? "–"+to : "+"}</div>`;
+      for(let i=0;i<breaks.length;i++){
+        const from=breaks[i], to=breaks[i+1];
+        html += `<div class="legend-row"><span class="swatch" style="background:${colors[i]}"></span>${from}${to?`–${to}`:"+"}</div>`;
       }
       legend.innerHTML = html;
-
       function setChoroVisible(vis){
-        const v = vis ? "visible" : "none";
-        map.setLayoutProperty("areas-fill", "visibility", v);
-        map.setLayoutProperty("areas-outline", "visibility", v);
-        legend.style.display = vis ? "block" : "none";
+        const v = vis?"visible":"none";
+        map.setLayoutProperty("areas-fill","visibility",v);
+        map.setLayoutProperty("areas-outline","visibility",v);
+        legend.style.display = vis?"block":"none";
       }
-
-      checkbox.addEventListener("change", (e)=> setChoroVisible(e.target.checked));
+      checkbox.addEventListener("change", e=>setChoroVisible(e.target.checked));
     }
 
     const q = document.getElementById("q");
     const reset = document.getElementById("reset");
     function applyFilter(){
-      const s = (q.value || "").toLowerCase();
-      if (!s){
-        map.setFilter("unclustered", ["!", ["has", "point_count"]]);
-        return;
-      }
-      map.setFilter("unclustered", [
-        "all",
-        ["!", ["has", "point_count"]],
+      const s = (q.value||"").toLowerCase();
+      if(!s){ map.setFilter("unclustered",["!",["has","point_count"]]); return; }
+      map.setFilter("unclustered",[
+        "all",["!",["has","point_count"]],
         ["any",
-          ["in", ["literal", s], ["downcase", ["get", "name"]]],
-          ["in", ["literal", s], ["downcase", ["get", "address"]]],
-          ["in", ["literal", s], ["downcase", ["get", "category"]]]
+          ["in",["literal",s],["downcase",["get","name"]]],
+          ["in",["literal",s],["downcase",["get","address"]]],
+          ["in",["literal",s],["downcase",["get","category"]]]
         ]
       ]);
     }
     q.addEventListener("input", applyFilter);
-    reset.addEventListener("click", () => { q.value = ""; applyFilter(); });
+    reset.addEventListener("click", ()=>{ q.value=""; applyFilter(); });
   });
 })();
