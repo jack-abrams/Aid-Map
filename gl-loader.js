@@ -143,29 +143,6 @@ function csvToGeoJSONRecs(recs){
                (p.population ? `<br>Rate: <b>${rate}</b> / 1,000<br>Population: ${pop}` : "");
       }
 
-      map.on("mousemove","areas-fill",(e)=>{
-        if (!e.features.length) return;
-        const f = e.features[0];
-        if (hoveredId !== null) map.setFeatureState({source:"areas", id: hoveredId}, {hover:false});
-        hoveredId = f.id;
-        map.setFeatureState({source:"areas", id: hoveredId}, {hover:true});
-        areaPopup.setLngLat(e.lngLat).setHTML(areaHTML(f.properties)).addTo(map);
-      });
-
-      map.on("mouseleave","areas-fill",()=>{
-        if (hoveredId !== null) map.setFeatureState({source:"areas", id: hoveredId}, {hover:false});
-        hoveredId = null;
-        areaPopup.remove();
-      });
-
-      map.on("click","areas-fill",(e)=>{
-        if (!e.features.length) return;
-        const f = e.features[0];
-        new maplibregl.Popup({closeButton:true, closeOnClick:true, offset:8})
-          .setLngLat(e.lngLat)
-          .setHTML(areaHTML(f.properties))
-          .addTo(map);
-      });
 
       const checkbox = document.getElementById("toggle-choropleth");
       const legend = document.getElementById("legend");
