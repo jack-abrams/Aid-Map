@@ -178,4 +178,11 @@ function csvToGeoJSONRecs(recs){
     q.addEventListener("input", applyFilter);
     reset.addEventListener("click", ()=>{ q.value=""; applyFilter(); });
   });
+  const californiaBounds = [
+    [-124.48, 32.53],
+    [-114.13, 42.01]
+  ];
+  
+  map.setMaxBounds(californiaBounds);
+  
 })();
