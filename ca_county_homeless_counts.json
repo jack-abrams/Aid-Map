@@ -1,0 +1,303 @@
+{
+  "metadata": {
+    "description": "Latest available Point-in-Time (PIT) homeless counts by California county. Values and years vary by county.",
+    "last_updated": "2025-09-22",
+    "fields": {
+      "total": "integer or null",
+      "as_of": "YYYY or YYYY-MM-DD",
+      "source": "URL string or null"
+    }
+  },
+  "counts": {
+    "Alameda": {
+      "total": 9450,
+      "as_of": "2024-01-25",
+      "source": "https://homelessness.acgov.org/homelessness-assets/docs/infographic/Alameda%20County%20PIT%202024%20Infographic.pdf"
+    },
+    "Alpine": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Amador": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Butte": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Calaveras": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Colusa": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Contra Costa": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Del Norte": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "El Dorado": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Fresno": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Glenn": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Humboldt": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Imperial": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Inyo": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Kern": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Kings": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Lake": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Lassen": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Los Angeles": {
+      "total": 75312,
+      "as_of": "2024-01-23",
+      "source": "https://www.lahsa.org/news?article=977-unsheltered-homelessness-drops-and-sheltered-homelessness-rises-in-la"
+    },
+    "Madera": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Marin": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Mariposa": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Mendocino": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Merced": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Modoc": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Mono": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Monterey": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Napa": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Nevada": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Orange": {
+      "total": 7322,
+      "as_of": "2024-01-24",
+      "source": "https://www.ocgov.com/press/county-orange-releases-2024-point-time-count-results"
+    },
+    "Placer": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Plumas": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Riverside": {
+      "total": 3990,
+      "as_of": "2025-01-22",
+      "source": "https://rivco.org/news/riverside-county-sees-19-decrease-unsheltered-homeless-population"
+    },
+    "Sacramento": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "San Benito": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "San Bernardino": {
+      "total": 4255,
+      "as_of": "2024-01-23",
+      "source": "https://www.sbcounty.gov/uploads/sbchp/SBC-2024-Homeless-Count-Report.pdf"
+    },
+    "San Diego": {
+      "total": 10605,
+      "as_of": "2024-01-25",
+      "source": "https://www.rtfhsd.org/wp-content/uploads/2024/09/2024-San-Diego-Regional-Breakdown.pdf"
+    },
+    "San Francisco": {
+      "total": 8323,
+      "as_of": "2024-01-30",
+      "source": "https://media.api.sf.gov/documents/2024_San_Francisco_Point-in-Time_Count_Report_8_13_24.pdf"
+    },
+    "San Joaquin": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "San Luis Obispo": {
+      "total": 1175,
+      "as_of": "2024-01-22",
+      "source": "https://www.slocounty.ca.gov/departments/social-services/homeless-services-division/point-in-time-count"
+    },
+    "San Mateo": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Santa Barbara": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Santa Clara": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Santa Cruz": {
+      "total": 1850,
+      "as_of": "2024-01-25",
+      "source": "https://www.santacruzcountyca.gov/portals/0/county/CAO/press%20releases/2024/Preliminary2024PITCountRevealsSustainedProgress.pdf"
+    },
+    "Shasta": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Sierra": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Siskiyou": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Solano": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Sonoma": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Stanislaus": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Sutter": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Tehama": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Trinity": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Tulare": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Tuolumne": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Ventura": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Yolo": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    },
+    "Yuba": {
+      "total": null,
+      "as_of": null,
+      "source": null
+    }
+  }
+}
