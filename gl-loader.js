@@ -34,6 +34,11 @@ function csvToGeoJSONRecs(recs){
   return { type: "FeatureCollection", features: feats };
 }
 
+function toNumber(value){
+  const num = Number(value);
+  return Number.isFinite(num) ? num : null;
+}
+
 (async function(){
   const STYLE_URL = "https://api.maptiler.com/maps/streets-v2/style.json?key=sfj85VORuGeFauZZw7Iy";
 
@@ -90,8 +95,26 @@ function csvToGeoJSONRecs(recs){
       map.fitBounds(b, { padding: 24, maxZoom: 13, duration: 500 });
     }
 
-    const breaks = [0,1,2,4,8,15,25,50];
-    const colors = ["#FFEDA0","#FED976","#FEB24C","#FD8D3C","#FC4E2A","#E31A1C","#BD0026","#800026"];
+    const breaks = [0,1,2,3,4,5,6,7,8];
+    const colors = ["#f2f0f7","#dadaeb","#bcbddc","#9e9ac8","#807dba","#6a51a3","#54278f","#3f007d","#250064"];
+    const perCapitaText = await fetch("CA_Counties__Homeless_People_per_1_000__official___estimates_.csv", { cache: "no-store" })
+      .then(r=>r.ok?r.text():null)
+      .catch(()=>null);
+    const perCapitaMap = new Map();
+    if (perCapitaText){
+      const perCapitaRecords = recordsFromCSV(perCapitaText);
+      for (const rec of perCapitaRecords){
+        const key = (rec.county||"").trim().toLowerCase();
+        if(!key) continue;
+        perCapitaMap.set(key, {
+          rate: toNumber(rec.per_1000),
+          homeless: toNumber(rec.homeless_people),
+          population: toNumber(rec.population),
+          year: toNumber(rec.year),
+          method: (rec.method||"").trim() || null
+        });
+      }
+    }
     const areasRaw = await fetch("areas.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
 
     if (areasRaw && areasRaw.features?.length){
@@ -100,8 +123,18 @@ function csvToGeoJSONRecs(recs){
         type: "FeatureCollection",
         features: areasRaw.features.map(f => {
           const p = f.properties || {};
-          const rate = (p.population>0)?(1000*(p.homeless||0)/p.population):(p.homeless||0);
-          return { ...f, id:(p.id??idCounter++), properties:{...p,rate} };
+          const nameKey = (p.name||"").trim().toLowerCase();
+          const stats = perCapitaMap.get(nameKey);
+          const rate = stats?.rate ?? null;
+          const homeless = (stats?.homeless ?? toNumber(p.homeless));
+          const population = (stats?.population ?? toNumber(p.population));
+          const year = stats?.year ?? toNumber(p.homeless_as_of_year);
+          const props = { ...p, rate: Number.isFinite(rate) ? rate : null };
+          if (Number.isFinite(homeless)) props.homeless = homeless;
+          if (Number.isFinite(population)) props.population = population;
+          if (Number.isFinite(year)) props.homeless_as_of_year = year;
+          if (stats?.method) props.per_1000_method = stats.method;
+          return { ...f, id:(p.id??idCounter++), properties: props };
         })
       };
 
@@ -114,12 +147,19 @@ function csvToGeoJSONRecs(recs){
         layout:{visibility:"none"},
         paint:{
           "fill-color":[
-            "step",["get","rate"],
-            colors[0],breaks[1],colors[1],breaks[2],colors[2],breaks[3],colors[3],
-            breaks[4],colors[4],breaks[5],colors[5],breaks[6],colors[6],breaks[7],colors[7]
+            "case",
+              ["==", ["get","rate"], null], "rgba(0,0,0,0)",
+              ["step",["get","rate"],
+                colors[0],breaks[1],colors[1],breaks[2],colors[2],breaks[3],colors[3],
+                breaks[4],colors[4],breaks[5],colors[5],breaks[6],colors[6],breaks[7],colors[7],
+                breaks[8],colors[8]
+              ]
           ],
           "fill-opacity":[
-            "case", ["boolean",["feature-state","hover"],false], 0.9, 0.65
+            "case",
+              ["==", ["get","rate"], null], 0,
+              ["boolean",["feature-state","hover"],false], 0.9,
+              0.65
           ]
         }
       }, "clusters");
@@ -136,11 +176,20 @@ function csvToGeoJSONRecs(recs){
       const areaPopup = new maplibregl.Popup({ closeButton:false, closeOnClick:false, offset:8 });
 
       function areaHTML(p){
-        const rate = (p.rate||0).toFixed(1);
-        const cnt = (p.homeless ?? "—");
-        const pop = p.population ? Number(p.population).toLocaleString() : "—";
-        return `<b>${p.name||"Area"}</b><br>Count: <b>${cnt}</b>` +
-               (p.population ? `<br>Rate: <b>${rate}</b> / 1,000<br>Population: ${pop}` : "");
+        const rate = Number.isFinite(p.rate) ? p.rate.toFixed(1) : null;
+        const cnt = Number.isFinite(p.homeless) ? Number(p.homeless).toLocaleString() : null;
+        const pop = Number.isFinite(p.population) ? Number(p.population).toLocaleString() : null;
+        let html = `<b>${p.name||"Area"}</b>`;
+        if (cnt !== null) html += `<br>Count: <b>${cnt}</b>`;
+        if (rate !== null) html += `<br>Rate: <b>${rate}</b> / 1,000`;
+        if (pop !== null) html += `<br>Population: ${pop}`;
+        if (Number.isFinite(p.homeless_as_of_year)) html += `<br>Year: ${p.homeless_as_of_year}`;
+        const method = (p.per_1000_method||"").trim();
+        if (method){
+          const label = method.charAt(0).toUpperCase() + method.slice(1);
+          html += `<br>Method: ${label}`;
+        }
+        return html;
       }
 
 
