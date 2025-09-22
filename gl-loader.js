@@ -125,10 +125,19 @@ function toNumber(value){
           const p = f.properties || {};
           const nameKey = (p.name||"").trim().toLowerCase();
           const stats = perCapitaMap.get(nameKey);
-          const rate = stats?.rate ?? null;
+          const csvRate = stats?.rate ?? null;
           const homeless = (stats?.homeless ?? toNumber(p.homeless));
-          const population = (stats?.population ?? toNumber(p.population));
-          const year = stats?.year ?? toNumber(p.homeless_as_of_year);
+          const featurePopulation = toNumber(p.population ?? p.population_estimate ?? p.population_total);
+          const population = stats?.population ?? featurePopulation;
+          const featureRate = toNumber(p.rate ?? p.homeless_per_1000 ?? p.per_1000);
+          const derivedRate = (Number.isFinite(homeless) && Number.isFinite(population) && population > 0)
+            ? (homeless / population) * 1000
+            : null;
+          let rate = null;
+          if (Number.isFinite(csvRate)) rate = csvRate;
+          else if (Number.isFinite(featureRate)) rate = featureRate;
+          else if (Number.isFinite(derivedRate)) rate = derivedRate;
+          const year = stats?.year ?? toNumber(p.homeless_as_of_year ?? p.homeless_year);
           const props = { ...p, rate: Number.isFinite(rate) ? rate : null };
           if (Number.isFinite(homeless)) props.homeless = homeless;
           if (Number.isFinite(population)) props.population = population;
