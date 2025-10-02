@@ -1,0 +1,59 @@
+,county,year,homeless_people,population,per_1000,method
+0,Alameda,2024,9450,1656754,5.7,official
+1,Alpine,2024,3,1200,2.5,estimate
+2,Amador,2024,108,40100,2.7,estimate
+3,Butte,2024,1115,214400,5.2,estimate
+4,Calaveras,2024,141,47000,3.0,estimate
+5,Colusa,2024,40,22500,1.8,estimate
+6,Contra Costa,2024,2843,1169111,2.4,official
+7,Del Norte,2024,166,27700,6.0,estimate
+8,El Dorado,2024,427,194000,2.2,estimate
+9,Fresno,2024,4149,1011852,4.1,estimate
+10,Glenn,2024,81,29000,2.8,estimate
+11,Humboldt,2024,884,136000,6.5,estimate
+12,Imperial,2024,452,181000,2.5,estimate
+13,Inyo,2024,42,19000,2.2,estimate
+14,Kern,2024,3308,918941,3.6,estimate
+15,Kings,2024,306,153000,2.0,estimate
+16,Lake,2024,476,68000,7.0,estimate
+17,Lassen,2024,56,29500,1.9,estimate
+18,Los Angeles,2024,75312,9757179,7.7,official
+19,Madera,2024,426,164000,2.6,estimate
+20,Marin,2024,1090,259000,4.2,official
+21,Mariposa,2024,49,17500,2.8,estimate
+22,Mendocino,2024,564,91000,6.2,estimate
+23,Merced,2024,876,292000,3.0,estimate
+24,Modoc,2024,14,8600,1.6,estimate
+25,Mono,2024,34,14000,2.4,estimate
+26,Monterey,2024,1493,439000,3.4,estimate
+27,Napa,2024,411,137000,3.0,estimate
+28,Nevada,2024,364,104000,3.5,estimate
+29,Orange,2024,7322,3151606,2.3,official
+30,Placer,2024,946,430000,2.2,estimate
+31,Plumas,2024,43,19500,2.2,estimate
+32,Riverside,2025,3990,2473120,1.6,official
+33,Sacramento,2024,6615,1571332,4.2,official
+34,San Benito,2024,134,67000,2.0,estimate
+35,San Bernardino,2024,4255,2224807,1.9,official
+36,San Diego,2024,10605,3286069,3.2,official
+37,San Francisco,2024,8323,842754,9.9,official
+38,San Joaquin,2024,3331,793000,4.2,estimate
+39,San Luis Obispo,2024,846,282000,3.0,estimate
+40,San Mateo,2024,2130,764442,2.8,official
+41,Santa Barbara,2024,1595,443000,3.6,estimate
+42,Santa Clara,2024,10394,1866313,5.6,official
+43,Santa Cruz,2024,2025,270000,7.5,estimate
+44,Shasta,2024,1001,182000,5.5,estimate
+45,Sierra,2024,6,3100,1.9,estimate
+46,Siskiyou,2024,174,43500,4.0,estimate
+47,Solano,2024,1725,456000,3.8,official
+48,Sonoma,2024,2522,495000,5.1,official
+49,Stanislaus,2024,2151,566000,3.8,estimate
+50,Sutter,2024,309,103000,3.0,estimate
+51,Tehama,2024,244,66000,3.7,estimate
+52,Trinity,2024,80,16000,5.0,estimate
+53,Tulare,2024,1464,488000,3.0,estimate
+54,Tuolumne,2024,213,56000,3.8,estimate
+55,Ventura,2024,1989,828563,2.4,estimate
+56,Yolo,2024,884,221000,4.0,estimate
+57,Yuba,2024,415,83000,5.0,estimate
