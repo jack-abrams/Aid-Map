@@ -50,11 +50,23 @@ function toNumber(value){
   });
   map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
 
+  const geolocateControl = new maplibregl.GeolocateControl({
+    positionOptions: { enableHighAccuracy: true },
+    trackUserLocation: true,
+    showAccuracyCircle: false
+  });
+  map.addControl(geolocateControl, "bottom-right");
+
   const csvText = await fetch("foodbanks.csv", { cache: "no-store" }).then(r=>r.text());
   const records = recordsFromCSV(csvText);
   const points = csvToGeoJSONRecs(records);
 
   map.on("load", async () => {
+    try {
+      await geolocateControl.trigger();
+    } catch (err) {
+      console.warn("Geolocation not available", err);
+    }
     map.addSource("banks", { type: "geojson", data: points, cluster: true, clusterRadius: 50 });
     map.addLayer({
       id: "clusters", type: "circle", source: "banks", filter: ["has", "point_count"],
@@ -221,19 +233,21 @@ function toNumber(value){
 
     const q = document.getElementById("q");
     const reset = document.getElementById("reset");
-    function applyFilter(){
-      const s = (q.value||"").toLowerCase();
-      if(!s){ map.setFilter("unclustered",["!",["has","point_count"]]); return; }
-      map.setFilter("unclustered",[
-        "all",["!",["has","point_count"]],
-        ["any",
-          ["in",["literal",s],["downcase",["get","name"]]],
-          ["in",["literal",s],["downcase",["get","address"]]],
-          ["in",["literal",s],["downcase",["get","category"]]]
-        ]
-      ]);
+    if (q && reset){
+      function applyFilter(){
+        const s = (q.value||"").toLowerCase();
+        if(!s){ map.setFilter("unclustered",["!",["has","point_count"]]); return; }
+        map.setFilter("unclustered",[
+          "all",["!",["has","point_count"]],
+          ["any",
+            ["in",["literal",s],["downcase",["get","name"]]],
+            ["in",["literal",s],["downcase",["get","address"]]],
+            ["in",["literal",s],["downcase",["get","category"]]]
+          ]
+        ]);
+      }
+      q.addEventListener("input", applyFilter);
+      reset.addEventListener("click", ()=>{ q.value=""; applyFilter(); });
     }
-    q.addEventListener("input", applyFilter);
-    reset.addEventListener("click", ()=>{ q.value=""; applyFilter(); });
   });
 })();
