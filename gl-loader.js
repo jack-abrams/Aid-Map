@@ -57,6 +57,30 @@ function toNumber(value){
   });
   map.addControl(geolocateControl, "bottom-right");
 
+  const areaStatusEl = document.getElementById("areas-loading-status");
+  let areaStatusHideTimer = null;
+  const setAreaStatus = (state, message, options = {}) => {
+    if (!areaStatusEl) return;
+    if (areaStatusHideTimer){
+      clearTimeout(areaStatusHideTimer);
+      areaStatusHideTimer = null;
+    }
+    areaStatusEl.dataset.state = state;
+    areaStatusEl.textContent = message;
+    areaStatusEl.hidden = false;
+    if (options.autoHide){
+      const delay = typeof options.delay === "number" ? options.delay : 1800;
+      areaStatusHideTimer = setTimeout(() => {
+        areaStatusEl.hidden = true;
+        areaStatusHideTimer = null;
+      }, delay);
+    }
+  };
+
+  if (areaStatusEl){
+    setAreaStatus("loading", "Loading area boundaries…");
+  }
+
   const csvText = await fetch("foodbanks.csv", { cache: "no-store" }).then(r=>r.text());
   const records = recordsFromCSV(csvText);
   const points = csvToGeoJSONRecs(records);
@@ -128,7 +152,30 @@ function toNumber(value){
       }
     }
     const areasRaw = await fetch("areas.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
+    const primaryHadData = Array.isArray(areasRaw?.features);
 
+    const normalizeKey = (value) => (typeof value === "string" && value.trim()) ? value.trim().toLowerCase() : null;
+    const collectKeys = (targetSet, value) => {
+      const key = normalizeKey(value);
+      if (key) targetSet.add(key);
+    };
+
+    let areaFeatures = Array.isArray(areasRaw?.features) ? [...areasRaw.features] : [];
+
+    const existingKeys = new Set();
+    for (const feature of areaFeatures){
+      const props = feature.properties || {};
+      collectKeys(existingKeys, props.name);
+      collectKeys(existingKeys, props.display_name);
+      collectKeys(existingKeys, props.jurisdiction);
+      collectKeys(existingKeys, props.dataset);
+      if (Array.isArray(props.fallback_match)){
+        for (const value of props.fallback_match) collectKeys(existingKeys, value);
+      }
+    }
+
+    const fallbackRaw = await fetch("areas-fallback.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
+    const fallbackHadData = Array.isArray(fallbackRaw?.features);
     const normalizeKey = (value) => (typeof value === "string" && value.trim()) ? value.trim().toLowerCase() : null;
     const collectKeys = (targetSet, value) => {
       const key = normalizeKey(value);
@@ -283,6 +330,16 @@ function toNumber(value){
         legend.style.display = vis?"block":"none";
       }
       checkbox.addEventListener("change", e=>setChoroVisible(e.target.checked));
+
+      setAreaStatus("success", "Area boundaries loaded.", { autoHide: true, delay: 1600 });
+    }
+
+    if (!areaFeatures.length){
+      if (primaryHadData || fallbackHadData){
+        setAreaStatus("empty", "No area boundaries available.");
+      } else {
+        setAreaStatus("error", "Failed to load area boundaries.");
+      }
     }
 
     const q = document.getElementById("q");
