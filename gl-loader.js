@@ -57,6 +57,30 @@ function toNumber(value){
   });
   map.addControl(geolocateControl, "bottom-right");
 
+  const areaStatusEl = document.getElementById("areas-loading-status");
+  let areaStatusHideTimer = null;
+  const setAreaStatus = (state, message, options = {}) => {
+    if (!areaStatusEl) return;
+    if (areaStatusHideTimer){
+      clearTimeout(areaStatusHideTimer);
+      areaStatusHideTimer = null;
+    }
+    areaStatusEl.dataset.state = state;
+    areaStatusEl.textContent = message;
+    areaStatusEl.hidden = false;
+    if (options.autoHide){
+      const delay = typeof options.delay === "number" ? options.delay : 1800;
+      areaStatusHideTimer = setTimeout(() => {
+        areaStatusEl.hidden = true;
+        areaStatusHideTimer = null;
+      }, delay);
+    }
+  };
+
+  if (areaStatusEl){
+    setAreaStatus("loading", "Loading area boundaries…");
+  }
+
   const csvText = await fetch("foodbanks.csv", { cache: "no-store" }).then(r=>r.text());
   const records = recordsFromCSV(csvText);
   const points = csvToGeoJSONRecs(records);
@@ -128,12 +152,60 @@ function toNumber(value){
       }
     }
     const areasRaw = await fetch("areas.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
+    const primaryHadData = Array.isArray(areasRaw?.features);
 
-    if (areasRaw && areasRaw.features?.length){
+    const normalizeKey = (value) => (typeof value === "string" && value.trim()) ? value.trim().toLowerCase() : null;
+    const collectKeys = (targetSet, value) => {
+      const key = normalizeKey(value);
+      if (key) targetSet.add(key);
+    };
+
+    let areaFeatures = Array.isArray(areasRaw?.features) ? [...areasRaw.features] : [];
+
+    const existingKeys = new Set();
+    for (const feature of areaFeatures){
+      const props = feature.properties || {};
+      collectKeys(existingKeys, props.name);
+      collectKeys(existingKeys, props.display_name);
+      collectKeys(existingKeys, props.jurisdiction);
+      collectKeys(existingKeys, props.dataset);
+      if (Array.isArray(props.fallback_match)){
+        for (const value of props.fallback_match) collectKeys(existingKeys, value);
+      }
+    }
+
+    const fallbackRaw = await fetch("areas-fallback.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
+    const fallbackHadData = Array.isArray(fallbackRaw?.features);
+    const fallbackFeatures = Array.isArray(fallbackRaw?.features) ? fallbackRaw.features : [];
+    for (const fallback of fallbackFeatures){
+      const fallbackProps = fallback.properties || {};
+      const rawMatches = Array.isArray(fallbackProps.fallback_match)
+        ? fallbackProps.fallback_match
+        : (fallbackProps.fallback_match ? [fallbackProps.fallback_match] : []);
+      if (!rawMatches.length) continue;
+      const allMissing = rawMatches.every(value => {
+        const key = normalizeKey(value);
+        return key ? !existingKeys.has(key) : true;
+      });
+      if (!allMissing) continue;
+
+      const mergedProps = { ...fallbackProps };
+      if (!mergedProps.id){
+        const idBase = normalizeKey(mergedProps.name) || normalizeKey(rawMatches[0]) || "fallback";
+        mergedProps.id = `fallback-${idBase}`;
+      }
+      delete mergedProps.fallback_match;
+      areaFeatures.unshift({ ...fallback, properties: mergedProps });
+      for (const value of rawMatches) collectKeys(existingKeys, value);
+      collectKeys(existingKeys, mergedProps.name);
+      collectKeys(existingKeys, mergedProps.display_name);
+    }
+
+    if (areaFeatures.length){
       let idCounter = 1;
       const areas = {
         type: "FeatureCollection",
-        features: areasRaw.features.map(f => {
+        features: areaFeatures.map(f => {
           const p = f.properties || {};
           const nameKey = (p.name||"").trim().toLowerCase();
           const stats = perCapitaMap.get(nameKey);
@@ -155,6 +227,8 @@ function toNumber(value){
           if (Number.isFinite(population)) props.population = population;
           if (Number.isFinite(year)) props.homeless_as_of_year = year;
           if (stats?.method) props.per_1000_method = stats.method;
+          if (p.show_outline === false) props.show_outline = false;
+          else if (p.show_outline === true) props.show_outline = true;
           return { ...f, id:(p.id??idCounter++), properties: props };
         })
       };
@@ -190,7 +264,11 @@ function toNumber(value){
         type:"line",
         source:"areas",
         layout:{visibility:"none"},
-        paint:{"line-color":"#fff","line-width":1}
+        paint:{
+          "line-color":"#fff",
+          "line-width":["case", ["==", ["coalesce", ["get","show_outline"], true], false], 0, 1],
+          "line-opacity":["case", ["==", ["coalesce", ["get","show_outline"], true], false], 0, 1]
+        }
       }, "clusters");
 
       let hoveredId = null;
@@ -200,7 +278,9 @@ function toNumber(value){
         const rate = Number.isFinite(p.rate) ? p.rate.toFixed(1) : null;
         const cnt = Number.isFinite(p.homeless) ? Number(p.homeless).toLocaleString() : null;
         const pop = Number.isFinite(p.population) ? Number(p.population).toLocaleString() : null;
-        let html = `<b>${p.name||"Area"}</b>`;
+        const labelSource = p.display_name ?? p.name ?? "Area";
+        const label = (typeof labelSource === "string" ? labelSource : String(labelSource || "")).trim();
+        let html = `<b>${label||"Area"}</b>`;
         if (cnt !== null) html += `<br>Count: <b>${cnt}</b>`;
         if (rate !== null) html += `<br>Rate: <b>${rate}</b> / 1,000`;
         if (pop !== null) html += `<br>Population: ${pop}`;
@@ -229,6 +309,16 @@ function toNumber(value){
         legend.style.display = vis?"block":"none";
       }
       checkbox.addEventListener("change", e=>setChoroVisible(e.target.checked));
+
+      setAreaStatus("success", "Area boundaries loaded.", { autoHide: true, delay: 1600 });
+    }
+
+    if (!areaFeatures.length){
+      if (primaryHadData || fallbackHadData){
+        setAreaStatus("empty", "No area boundaries available.");
+      } else {
+        setAreaStatus("error", "Failed to load area boundaries.");
+      }
     }
 
     const q = document.getElementById("q");
