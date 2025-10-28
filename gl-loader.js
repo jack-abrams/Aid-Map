@@ -86,6 +86,46 @@ function toNumber(value){
   const points = csvToGeoJSONRecs(records);
 
   map.on("load", async () => {
+    const laBackground = {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: {
+            name: "Greater Los Angeles"
+          },
+          geometry: {
+            type: "Polygon",
+            coordinates: [[
+              [-119.15, 34.9],
+              [-118.2, 35.05],
+              [-117.45, 34.95],
+              [-117.35, 34.4],
+              [-117.35, 33.75],
+              [-117.85, 33.55],
+              [-118.6, 33.35],
+              [-119.2, 33.45],
+              [-119.45, 33.9],
+              [-119.35, 34.35],
+              [-119.15, 34.9]
+            ]]
+          }
+        }
+      ]
+    };
+
+    map.addSource("la-background", { type: "geojson", data: laBackground });
+    map.addLayer({
+      id: "la-background-fill",
+      type: "fill",
+      source: "la-background",
+      paint: {
+        "fill-color": "#f8fafc",
+        "fill-opacity": 0.22,
+        "fill-outline-color": "#cbd5f5"
+      }
+    });
+
     try {
       await geolocateControl.trigger();
     } catch (err) {
