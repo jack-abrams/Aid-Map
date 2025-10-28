@@ -1081,6 +1081,7 @@
         "homeless_as_of_year": 2024,
         "per_1000_method": "reported",
         "homeless_note": "2024 stakeholder-provided rate applied to 2020 population estimate for fallback rendering.",
+        "homeless_note": "Rate provided by stakeholder request; homeless total estimated using 2020 population.",
         "show_outline": true,
         "fallback_match": [
           "Long Beach",
@@ -1700,6 +1701,28 @@
                 -118.224541,
                 33.767618
               ]
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.27499999999999,
+              33.87
+            ],
+            [
+              -118.105,
+              33.87
+            ],
+            [
+              -118.105,
+              33.73
+            ],
+            [
+              -118.27499999999999,
+              33.73
+            ],
+            [
+              -118.27499999999999,
+              33.87
             ]
           ]
         ]
@@ -1719,6 +1742,12 @@
         "homeless_as_of_year": 2024,
         "per_1000_method": "reported",
         "homeless_note": "2024 stakeholder-provided rate applied to 2020 population baseline.",
+        "population": 91388,
+        "homeless": 731,
+        "homeless_per_1000": 8.0,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "reported",
+        "homeless_note": "Rate provided by stakeholder request; homeless total estimated using 2020 population.",
         "show_outline": true,
         "fallback_match": [
           "Santa Monica",
@@ -1776,6 +1805,24 @@
             [
               -118.483981,
               34.041635
+              -118.52,
+              34.045
+            ],
+            [
+              -118.46,
+              34.045
+            ],
+            [
+              -118.46,
+              33.995000000000005
+            ],
+            [
+              -118.52,
+              33.995000000000005
+            ],
+            [
+              -118.52,
+              34.045
             ]
           ]
         ]
@@ -1795,6 +1842,7 @@
         "homeless_as_of_year": 2024,
         "per_1000_method": "reported",
         "homeless_note": "2024 stakeholder-provided rate applied to 2020 population baseline.",
+        "homeless_note": "Rate provided by stakeholder request; homeless total estimated using 2020 population.",
         "show_outline": true,
         "fallback_match": [
           "Palmdale",
@@ -2384,6 +2432,28 @@
                 -118.156762,
                 34.595616
               ]
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.18499999999999,
+              34.65
+            ],
+            [
+              -118.015,
+              34.65
+            ],
+            [
+              -118.015,
+              34.51
+            ],
+            [
+              -118.18499999999999,
+              34.51
+            ],
+            [
+              -118.18499999999999,
+              34.65
             ]
           ]
         ]
@@ -2403,6 +2473,7 @@
         "homeless_as_of_year": 2024,
         "per_1000_method": "estimated",
         "homeless_note": "Estimated using 2024 LAHSA SPA 2 trend applied to 2020 population for Verdugo cities.",
+        "homeless_note": "Estimated from LAHSA regional trends for Verdugo cities; applied to 2020 population.",
         "show_outline": true,
         "fallback_match": [
           "Glendale",
@@ -2608,6 +2679,24 @@
             [
               -118.238807,
               34.252502
+              -118.295,
+              34.2
+            ],
+            [
+              -118.22500000000001,
+              34.2
+            ],
+            [
+              -118.22500000000001,
+              34.14
+            ],
+            [
+              -118.295,
+              34.14
+            ],
+            [
+              -118.295,
+              34.2
             ]
           ]
         ]
@@ -5209,6 +5298,12 @@
         "fallback_match": [
           "Beverly Hills",
           "City of Beverly Hills"
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using Pasadena point-in-time count trend scaled to 2024 county average.",
+        "show_outline": true,
+        "fallback_match": [
+          "Pasadena",
+          "City of Pasadena"
         ]
       },
       "geometry": {
@@ -5234,6 +5329,24 @@
             [
               -118.418,
               34.085
+              -118.16499999999999,
+              34.19
+            ],
+            [
+              -118.095,
+              34.19
+            ],
+            [
+              -118.095,
+              34.129999999999995
+            ],
+            [
+              -118.16499999999999,
+              34.129999999999995
+            ],
+            [
+              -118.16499999999999,
+              34.19
             ]
           ]
         ]
@@ -5257,6 +5370,21 @@
         "fallback_match": [
           "Culver City",
           "City of Culver City"
+        "id": "burbank",
+        "name": "Burbank",
+        "display_name": "Burbank",
+        "jurisdiction": "City of Burbank",
+        "dataset": "city",
+        "population": 107337,
+        "homeless": 429,
+        "homeless_per_1000": 4.0,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated from Verdugo regional count share and 2020 population base.",
+        "show_outline": true,
+        "fallback_match": [
+          "Burbank",
+          "City of Burbank"
         ]
       },
       "geometry": {
@@ -5282,6 +5410,24 @@
             [
               -118.412,
               34.038000000000004
+              -118.35,
+              34.205
+            ],
+            [
+              -118.28999999999999,
+              34.205
+            ],
+            [
+              -118.28999999999999,
+              34.155
+            ],
+            [
+              -118.35,
+              34.155
+            ],
+            [
+              -118.35,
+              34.205
             ]
           ]
         ]
@@ -5305,6 +5451,21 @@
         "fallback_match": [
           "Malibu",
           "City of Malibu"
+        "id": "santa-clarita",
+        "name": "Santa Clarita",
+        "display_name": "Santa Clarita",
+        "jurisdiction": "City of Santa Clarita",
+        "dataset": "city",
+        "population": 228673,
+        "homeless": 572,
+        "homeless_per_1000": 2.5,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using SPA 2 2024 point-in-time results for Santa Clarita Valley.",
+        "show_outline": true,
+        "fallback_match": [
+          "Santa Clarita",
+          "City of Santa Clarita"
         ]
       },
       "geometry": {
@@ -5330,6 +5491,24 @@
             [
               -118.73,
               34.06
+              -118.57000000000001,
+              34.459999999999994
+            ],
+            [
+              -118.45,
+              34.459999999999994
+            ],
+            [
+              -118.45,
+              34.36
+            ],
+            [
+              -118.57000000000001,
+              34.36
+            ],
+            [
+              -118.57000000000001,
+              34.459999999999994
             ]
           ]
         ]
@@ -5353,6 +5532,21 @@
         "fallback_match": [
           "Compton",
           "City of Compton"
+        "id": "lancaster",
+        "name": "Lancaster",
+        "display_name": "Lancaster",
+        "jurisdiction": "City of Lancaster",
+        "dataset": "city",
+        "population": 173516,
+        "homeless": 1562,
+        "homeless_per_1000": 9.0,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using Antelope Valley 2024 point-in-time count proportion.",
+        "show_outline": true,
+        "fallback_match": [
+          "Lancaster",
+          "City of Lancaster"
         ]
       },
       "geometry": {
@@ -5642,6 +5836,24 @@
             [
               -118.200532,
               33.888229
+              -118.235,
+              34.77
+            ],
+            [
+              -118.06500000000001,
+              34.77
+            ],
+            [
+              -118.06500000000001,
+              34.63
+            ],
+            [
+              -118.235,
+              34.63
+            ],
+            [
+              -118.235,
+              34.77
             ]
           ]
         ]
@@ -5665,6 +5877,21 @@
         "fallback_match": [
           "East Los Angeles",
           "East L.A."
+        "id": "pomona",
+        "name": "Pomona",
+        "display_name": "Pomona",
+        "jurisdiction": "City of Pomona",
+        "dataset": "city",
+        "population": 151713,
+        "homeless": 1138,
+        "homeless_per_1000": 7.5,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated leveraging 2024 East San Gabriel Valley count and Pomona share from prior year reports.",
+        "show_outline": true,
+        "fallback_match": [
+          "Pomona",
+          "City of Pomona"
         ]
       },
       "geometry": {
@@ -5750,6 +5977,72 @@
             [
               -118.177735,
               34.062299
+              -117.795,
+              34.095
+            ],
+            [
+              -117.705,
+              34.095
+            ],
+            [
+              -117.705,
+              34.025000000000006
+            ],
+            [
+              -117.795,
+              34.025000000000006
+            ],
+            [
+              -117.795,
+              34.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "el-monte",
+        "name": "El Monte",
+        "display_name": "El Monte",
+        "jurisdiction": "City of El Monte",
+        "dataset": "city",
+        "population": 109450,
+        "homeless": 602,
+        "homeless_per_1000": 5.5,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using San Gabriel Valley 2024 data scaled to El Monte's share of unsheltered population.",
+        "show_outline": true,
+        "fallback_match": [
+          "El Monte",
+          "City of El Monte"
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.065,
+              34.108
+            ],
+            [
+              -117.995,
+              34.108
+            ],
+            [
+              -117.995,
+              34.052
+            ],
+            [
+              -118.065,
+              34.052
+            ],
+            [
+              -118.065,
+              34.108
             ]
           ]
         ]
@@ -5773,6 +6066,21 @@
         "fallback_match": [
           "Hollywood",
           "Los Angeles - Hollywood"
+        "id": "downey",
+        "name": "Downey",
+        "display_name": "Downey",
+        "jurisdiction": "City of Downey",
+        "dataset": "city",
+        "population": 114444,
+        "homeless": 481,
+        "homeless_per_1000": 4.2,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated from Gateway Cities 2024 total distributed by Downey's historical share.",
+        "show_outline": true,
+        "fallback_match": [
+          "Downey",
+          "City of Downey"
         ]
       },
       "geometry": {
@@ -5810,6 +6118,24 @@
             [
               -118.32691,
               34.105208
+              -118.175,
+              33.967999999999996
+            ],
+            [
+              -118.105,
+              33.967999999999996
+            ],
+            [
+              -118.105,
+              33.912
+            ],
+            [
+              -118.175,
+              33.912
+            ],
+            [
+              -118.175,
+              33.967999999999996
             ]
           ]
         ]
@@ -5912,6 +6238,46 @@
                 -118.45602,
                 34.009879
               ]
+        "id": "whittier",
+        "name": "Whittier",
+        "display_name": "Whittier",
+        "jurisdiction": "City of Whittier",
+        "dataset": "city",
+        "population": 87293,
+        "homeless": 419,
+        "homeless_per_1000": 4.8,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated from Gateway Cities 2024 total distributed by Whittier's historical share.",
+        "show_outline": true,
+        "fallback_match": [
+          "Whittier",
+          "City of Whittier"
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.075,
+              33.998
+            ],
+            [
+              -118.00500000000001,
+              33.998
+            ],
+            [
+              -118.00500000000001,
+              33.942
+            ],
+            [
+              -118.075,
+              33.942
+            ],
+            [
+              -118.075,
+              33.998
             ]
           ]
         ]
@@ -6270,6 +6636,46 @@
                 -118.296404,
                 33.780317
               ]
+        "id": "inglewood",
+        "name": "Inglewood",
+        "display_name": "Inglewood",
+        "jurisdiction": "City of Inglewood",
+        "dataset": "city",
+        "population": 107762,
+        "homeless": 1132,
+        "homeless_per_1000": 10.5,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using South Los Angeles 2024 count emphasizing Inglewood corridor growth.",
+        "show_outline": true,
+        "fallback_match": [
+          "Inglewood",
+          "City of Inglewood"
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -118.38,
+              33.988
+            ],
+            [
+              -118.32,
+              33.988
+            ],
+            [
+              -118.32,
+              33.932
+            ],
+            [
+              -118.38,
+              33.932
+            ],
+            [
+              -118.38,
+              33.988
             ]
           ]
         ]
@@ -6293,6 +6699,21 @@
         "fallback_match": [
           "Koreatown",
           "Los Angeles - Koreatown"
+        "id": "torrance",
+        "name": "Torrance",
+        "display_name": "Torrance",
+        "jurisdiction": "City of Torrance",
+        "dataset": "city",
+        "population": 147190,
+        "homeless": 765,
+        "homeless_per_1000": 5.2,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated from South Bay 2024 point-in-time data scaled to Torrance population.",
+        "show_outline": true,
+        "fallback_match": [
+          "Torrance",
+          "City of Torrance"
         ]
       },
       "geometry": {
@@ -6330,6 +6751,24 @@
             [
               -118.286908,
               34.07651
+              -118.38000000000001,
+              33.870000000000005
+            ],
+            [
+              -118.3,
+              33.870000000000005
+            ],
+            [
+              -118.3,
+              33.81
+            ],
+            [
+              -118.38000000000001,
+              33.81
+            ],
+            [
+              -118.38000000000001,
+              33.870000000000005
             ]
           ]
         ]
@@ -6353,6 +6792,21 @@
         "fallback_match": [
           "Highland Park",
           "Los Angeles - Highland Park"
+        "id": "west-hollywood",
+        "name": "West Hollywood",
+        "display_name": "West Hollywood",
+        "jurisdiction": "City of West Hollywood",
+        "dataset": "city",
+        "population": 36194,
+        "homeless": 579,
+        "homeless_per_1000": 16.0,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using 2024 Westside Service Planning Area trends and recent city reports.",
+        "show_outline": true,
+        "fallback_match": [
+          "West Hollywood",
+          "City of West Hollywood"
         ]
       },
       "geometry": {
@@ -6454,6 +6908,24 @@
             [
               -118.190805,
               34.131108
+              -118.378,
+              34.105000000000004
+            ],
+            [
+              -118.342,
+              34.105000000000004
+            ],
+            [
+              -118.342,
+              34.075
+            ],
+            [
+              -118.378,
+              34.075
+            ],
+            [
+              -118.378,
+              34.105000000000004
             ]
           ]
         ]
@@ -6477,6 +6949,21 @@
         "fallback_match": [
           "Echo Park",
           "Los Angeles - Echo Park"
+        "id": "beverly-hills",
+        "name": "Beverly Hills",
+        "display_name": "Beverly Hills",
+        "jurisdiction": "City of Beverly Hills",
+        "dataset": "city",
+        "population": 32801,
+        "homeless": 98,
+        "homeless_per_1000": 3.0,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using 2024 Beverly Hills PIT results rounded to the nearest tenth per 1,000.",
+        "show_outline": true,
+        "fallback_match": [
+          "Beverly Hills",
+          "City of Beverly Hills"
         ]
       },
       "geometry": {
@@ -6542,6 +7029,24 @@
             [
               -118.248307,
               34.08591
+              -118.418,
+              34.085
+            ],
+            [
+              -118.382,
+              34.085
+            ],
+            [
+              -118.382,
+              34.055
+            ],
+            [
+              -118.418,
+              34.055
+            ],
+            [
+              -118.418,
+              34.085
             ]
           ]
         ]
@@ -6565,6 +7070,21 @@
         "fallback_match": [
           "Silver Lake",
           "Los Angeles - Silver Lake"
+        "id": "culver-city",
+        "name": "Culver City",
+        "display_name": "Culver City",
+        "jurisdiction": "City of Culver City",
+        "dataset": "city",
+        "population": 40579,
+        "homeless": 345,
+        "homeless_per_1000": 8.5,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated combining 2024 Culver City PIT result with city population baseline.",
+        "show_outline": true,
+        "fallback_match": [
+          "Culver City",
+          "City of Culver City"
         ]
       },
       "geometry": {
@@ -6626,6 +7146,24 @@
             [
               -118.258808,
               34.109009
+              -118.412,
+              34.038000000000004
+            ],
+            [
+              -118.368,
+              34.038000000000004
+            ],
+            [
+              -118.368,
+              34.002
+            ],
+            [
+              -118.412,
+              34.002
+            ],
+            [
+              -118.412,
+              34.038000000000004
             ]
           ]
         ]
@@ -6649,6 +7187,21 @@
         "fallback_match": [
           "Boyle Heights",
           "Los Angeles - Boyle Heights"
+        "id": "malibu",
+        "name": "Malibu",
+        "display_name": "Malibu",
+        "jurisdiction": "City of Malibu",
+        "dataset": "city",
+        "population": 10654,
+        "homeless": 192,
+        "homeless_per_1000": 18.0,
+        "homeless_as_of_year": 2024,
+        "per_1000_method": "estimated",
+        "homeless_note": "Estimated using Westside coastal 2024 PIT data relative to Malibu population.",
+        "show_outline": true,
+        "fallback_match": [
+          "Malibu",
+          "City of Malibu"
         ]
       },
       "geometry": {
@@ -6686,6 +7239,24 @@
             [
               -118.192705,
               34.061811
+              -118.73,
+              34.06
+            ],
+            [
+              -118.63000000000001,
+              34.06
+            ],
+            [
+              -118.63000000000001,
+              34.0
+            ],
+            [
+              -118.73,
+              34.0
+            ],
+            [
+              -118.73,
+              34.06
             ]
           ]
         ]
