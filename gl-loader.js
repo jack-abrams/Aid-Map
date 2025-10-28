@@ -176,27 +176,6 @@ function toNumber(value){
 
     const fallbackRaw = await fetch("areas-fallback.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
     const fallbackHadData = Array.isArray(fallbackRaw?.features);
-    const normalizeKey = (value) => (typeof value === "string" && value.trim()) ? value.trim().toLowerCase() : null;
-    const collectKeys = (targetSet, value) => {
-      const key = normalizeKey(value);
-      if (key) targetSet.add(key);
-    };
-
-    let areaFeatures = Array.isArray(areasRaw?.features) ? [...areasRaw.features] : [];
-
-    const existingKeys = new Set();
-    for (const feature of areaFeatures){
-      const props = feature.properties || {};
-      collectKeys(existingKeys, props.name);
-      collectKeys(existingKeys, props.display_name);
-      collectKeys(existingKeys, props.jurisdiction);
-      collectKeys(existingKeys, props.dataset);
-      if (Array.isArray(props.fallback_match)){
-        for (const value of props.fallback_match) collectKeys(existingKeys, value);
-      }
-    }
-
-    const fallbackRaw = await fetch("areas-fallback.geojson", { cache: "no-store" }).then(r=>r.ok?r.json():null).catch(()=>null);
     const fallbackFeatures = Array.isArray(fallbackRaw?.features) ? fallbackRaw.features : [];
     for (const fallback of fallbackFeatures){
       const fallbackProps = fallback.properties || {};
@@ -362,3 +341,4 @@ function toNumber(value){
     }
   });
 })();
+
