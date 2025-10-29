@@ -86,46 +86,6 @@ function toNumber(value){
   const points = csvToGeoJSONRecs(records);
 
   map.on("load", async () => {
-    const laBackground = {
-      type: "FeatureCollection",
-      features: [
-        {
-          type: "Feature",
-          properties: {
-            name: "Greater Los Angeles"
-          },
-          geometry: {
-            type: "Polygon",
-            coordinates: [[
-              [-119.15, 34.9],
-              [-118.2, 35.05],
-              [-117.45, 34.95],
-              [-117.35, 34.4],
-              [-117.35, 33.75],
-              [-117.85, 33.55],
-              [-118.6, 33.35],
-              [-119.2, 33.45],
-              [-119.45, 33.9],
-              [-119.35, 34.35],
-              [-119.15, 34.9]
-            ]]
-          }
-        }
-      ]
-    };
-
-    map.addSource("la-background", { type: "geojson", data: laBackground });
-    map.addLayer({
-      id: "la-background-fill",
-      type: "fill",
-      source: "la-background",
-      paint: {
-        "fill-color": "#4f46e5",
-        "fill-opacity": 0.22,
-        "fill-outline-color": "#cbd5f5"
-      }
-    });
-
     try {
       await geolocateControl.trigger();
     } catch (err) {
@@ -276,10 +236,24 @@ function toNumber(value){
       map.addSource("areas", { type:"geojson", data:areas, promoteId:"id" });
 
       map.addLayer({
+        id: "areas-background",
+        type: "fill",
+        source: "areas",
+        filter: ["==", ["coalesce", ["get", "dataset"], ""], "background"],
+        layout: { visibility: "none" },
+        paint: {
+          "fill-color": "#4f46e5",
+          "fill-opacity": 0.22,
+          "fill-outline-color": "#cbd5f5"
+        }
+      }, "clusters");
+
+      map.addLayer({
         id:"areas-fill",
         type:"fill",
         source:"areas",
         layout:{visibility:"none"},
+        filter:["!=", ["coalesce", ["get", "dataset"], ""], "background"],
         paint:{
           "fill-color":[
             "case",
@@ -304,6 +278,7 @@ function toNumber(value){
         type:"line",
         source:"areas",
         layout:{visibility:"none"},
+        filter:["!=", ["coalesce", ["get", "dataset"], ""], "background"],
         paint:{
           "line-color":"#fff",
           "line-width":["case", ["==", ["coalesce", ["get","show_outline"], true], false], 0, 1],
@@ -344,6 +319,7 @@ function toNumber(value){
       legend.innerHTML = html;
       function setChoroVisible(vis){
         const v = vis?"visible":"none";
+        map.setLayoutProperty("areas-background","visibility",v);
         map.setLayoutProperty("areas-fill","visibility",v);
         map.setLayoutProperty("areas-outline","visibility",v);
         legend.style.display = vis?"block":"none";
