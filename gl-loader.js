@@ -244,7 +244,7 @@ function toNumber(value){
         paint: {
           "fill-color": "#4f46e5",
           "fill-opacity": 0.22,
-          "fill-outline-color": "#cbd5f5"
+          "fill-outline-color": "#ffffff"
         }
       }, "clusters");
 
@@ -278,7 +278,7 @@ function toNumber(value){
         type:"line",
         source:"areas",
         layout:{visibility:"none"},
-        filter:["!=", ["coalesce", ["get", "dataset"], ""], "background"],
+        filter:["!=", ["coalesce", ["get", "show_outline"], true], false],
         paint:{
           "line-color":"#fff",
           "line-width":["case", ["==", ["coalesce", ["get","show_outline"], true], false], 0, 1],
