@@ -120,7 +120,7 @@ function toNumber(value){
       type: "fill",
       source: "la-background",
       paint: {
-        "fill-color": "#f8fafc",
+        "fill-color": "#4f46e5",
         "fill-opacity": 0.22,
         "fill-outline-color": "#cbd5f5"
       }
